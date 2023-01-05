@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- AR.js scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Create a normal button to enable AR mode -->
+    <button id="ar-enable-button">Enable AR</button>
+
+    <!-- Create a video element to display the camera feed -->
+    <video id="camera" autoplay playsinline></video>
+
+    <!-- Create an AR scene -->
+    <a-scene id="ar-scene" embedded arjs>
+      <!-- Create an AR button -->
+      <a-entity
+        id="ar-button"
+        position="0 0 -1"
+        text="text: AR Button; color: white; align: center"
+        geometry="primitive: plane; width: 1; height: 0.5"
+        material="opacity: 0.5"
+        visible="false"
+        clickable
+      >Tap me</a-entity>
+    </a-scene>
+  </body>
+  <script>
+    // Select the normal button and the AR button
+    const arEnableButton = document.querySelector("#ar-enable-button");
+    const arButton = document.querySelector("#ar-button");
+
+    // Add a click event listener to the normal button
+    arEnableButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Check if the browser supports AR
+      if ("xr" in navigator) {
+        // Start an AR session
+        navigator.xr.requestSession("immersive-ar").then(function (arSession) {
+          // Successfully started an AR session
+          // Do something with the AR session...
+
+          // Enable the camera and show the video
+          navigator.mediaDevices
+            .getUserMedia({ video: true })
+            .then(function (stream) {
+              video.zoom = 0.5;  
+              video.srcObject = stream;
+              video.play();
+
+              // Show the AR scene
+              arScene.setAttribute("visible", true);
+              arButton.setAttribute('visible', true);
+
+                // Set the position of the AR button
+                arButton.setAttribute('position', '0 0 -1');
+            });
+        });
+      } else {
+        // The browser does not support AR
+        console.log("AR is not supported on this device");
+      }
+    });
+
+    // Add a click event listener to the AR button
+    arButton.addEventListener("click", function () {
+      // Log "hello" to the console when the AR button is clicked
+      console.log("hello");
+    });
+  </script>
+</html>

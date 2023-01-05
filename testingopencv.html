@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script async src="js/opencv.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Create a video element to display the camera feed -->
+    <video id="video" autoplay playsinline></video>
+
+    <!-- Create an AR scene -->
+    <a-scene id="ar-scene" embedded arjs>
+      <!-- Create an AR button -->
+      <a-entity
+        id="ar-button"
+        position="0 0 -1"
+        text="text: AR Button; color: white; align: center"
+        geometry="primitive: plane; width: 1; height: 0.5"
+        material="opacity: 0.5"
+        visible="false"
+        clickable
+      ></a-entity>
+    </a-scene>
+  </body>
+  <script>
+    // Select the video element and the AR button
+    const video = document.querySelector("#video");
+    const arButton = document.querySelector("#ar-button");
+
+    // Set the frame rate of the video
+    const frameRate = 30;
+
+    // Access the camera and set the stream as the source of the video element
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(function (stream) {
+        video.srcObject = stream;
+        video.play();
+
+        // Create a timer to process the frames of the video
+        setInterval(function () {
+          // Get the current frame of the video
+          const frame = cv.matFromImageData(video);
+
+          // Convert the frame to grayscale
+          cv.cvtColor(frame, frame, cv.COLOR_RGB2GRAY);
+
+          // Detect text in the frame
+          const text = cv.text.detect(frame);
+
+          // Do something with the detected text
+          console.log(text);
+
+          // Check if text was detected in the frame
+          if (text.length > 0) {
+            // Set the position of the AR button below the text
+            arButton.setAttribute("position", `0 ${text[0].bottom + 0.5} -1`);
+
+            // Show the AR button
+            arButton.setAttribute("visible", true);
+          } else {
+            // Hide the AR button
+            arButton.setAttribute("visible", false);
+          }
+        }, 1000 / frameRate);
+      });
+  </script>
+</html>
