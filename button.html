@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Include the AR.js library -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ar.js@3.0.1/aframe/build/aframe-ar.min.js"></script> -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+
+    <script type="module" src="https://unpkg.com/@leoncvlt/ar-button"></script>
+<link rel="stylesheet" href="https://unpkg.com/@leoncvlt/ar-button/styles.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Create a normal button to enable AR mode -->
+    <ar-button
+    src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.glb"
+    ios-src="https://github.com/leoncvlt/ar-button/raw/master/assets/Astronaut.usdz"
+    link="https://www.nasa.gov/"
+    title="A 3D model of an astronaut">
+      See in Augmented Reality 
+</ar-button>
+
+<!-- <model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="https://drive.google.com/file/d/1bdoYHsRrtpY6Q77SWlfsInl0qJgXfkRz/view?usp=share_link"></model-viewer> -->
+</html>
