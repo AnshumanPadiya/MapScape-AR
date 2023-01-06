@@ -1,6 +1,6 @@
 export const dataSet = [
     {
-        name: 'Taj Mahal',
+        name: 'Char Minar',
         src: "",
         info: ""
     },
