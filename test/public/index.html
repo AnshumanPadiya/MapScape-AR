@@ -9,6 +9,11 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <script type="module"
+    src="https://unpkg.com/@google/model-viewer@<version>/dist/model-viewer.min.js">
+</script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -39,5 +44,17 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+              ios-src="https://modelviewer.dev/shared-assets/models/Astronaut.usdz"
+              alt="A 3D model of an astronaut"
+              ar
+              auto-rotate
+              camera-controls></model-viewer> -->
+    <!-- <model-viewer
+        auto-rotate
+        camera-controls
+        ar
+        src="https://drive.google.com/file/d/18QvbZ_T2GXpYU_XezmQmmDBc3bjMWXRX/view?usp=sharing"
+      ></model-viewer>           -->
   </body>
 </html>
